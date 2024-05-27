@@ -1,19 +1,14 @@
 from elemRowOps import *
-from matrix import *
+from print import *
 
-def inverse(matrix):
+def GaussJordan(matrix):
     """
-    Finds an inverse
+    Turns a matrix into its rref using
+    the GaussJordan algorithm
+    Returns a matrix
     """
     numRows = len(matrix)
     numColumns = len(matrix[0])
-
-    if numRows != numColumns:
-        print("This matrix is not square and does not have an inverse")
-        return
-    
-    ident = identityMatrix(numRows)
-
     i = 0    #row pos
     j = 0    #col pos
     while i < numRows and j < numColumns:
@@ -22,31 +17,29 @@ def inverse(matrix):
             while (tempi < numRows):            #checks if there is a swap to make, then makes it, new row is now in pos i
                 if matrix[tempi][j] != 0:
                     swapRow(i, tempi, matrix)
-                    swapRow(i, tempi, ident)
                     break
                 else:
                     tempi += 1 
             if matrix[i][j] != 0:                           #if the row isnt 0, scales it
                  scaleRow(1 / (matrix[i][j]), i, matrix)
-                 scaleRow(1 / (matrix[i][j]), i, ident)
         else: 
-            scaleRow(1 / (matrix[i][j]), i, matrix) 
-            scaleRow(1 / (matrix[i][j]), i, ident)       #scales row if there was no swap needed
+            scaleRow(1 / (matrix[i][j]), i, matrix)        #scales row if there was no swap needed
         
-        tempi = i + 1                          #scales row below it by multiples of 1
+        tempi = 0                          #scales row below it by multiples of 1
         while (tempi < numRows):
-            if (matrix[tempi][j] != 0):
+            if (matrix[tempi][j] != 0 and tempi != i):
                 addRow(i, tempi, -matrix[tempi][j], matrix)
-                addRow(i, tempi, -matrix[tempi][j], ident)
             tempi += 1
         
         if matrix[i][j] == 1:
             i += 1
         j += 1
+        
 
-    if matrix.equals(identityMatrix(numRows)):
-        return ident
-    
-    else:
-        print("No inverse")
-        return
+    return matrix
+
+        
+
+
+
+

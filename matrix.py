@@ -1,5 +1,16 @@
-from rref import *
-from inverse import *
+from .MatrixOps.cholesky import *
+from .MatrixOps.determinant import *
+from .MatrixOps.eig import *
+from .MatrixOps.elemRowOps import *
+from .MatrixOps.inverse import *
+from .MatrixOps.matrixmult import *
+from .MatrixOps.palu import *
+from .MatrixOps.projection import *
+from .MatrixOps.qr import *
+from .MatrixOps.rref import *
+from .MatrixOps.sgd import *
+from .MatrixOps.print import printMatrix
+
 
 def enterMatrix():
     """
@@ -31,21 +42,6 @@ def enterMatrix():
                 print("Please enter valid input.")
     return matrix
 
-    
-    
-def printMatrix(matrix):
-    """
-    matrix: matrix
-    Prints a matrix with is the input
-    Void function, returns nothing
-    """
-    for row in matrix:
-        try:
-            temp = [str(int(num)) for num in row]  #Just makes it look better
-        except ValueError:
-            temp = [str((num)) for num in row]
-            print("Are you sure you typed in your matrix correctly, there are decimals.")
-        print("[" + ' '.join(temp) + "]")
 
 
 def matrixmult(matrix1, matrix2):

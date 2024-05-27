@@ -1,4 +1,4 @@
-from matrix import *
+from print import *
 
 def scaleRow(c, row, matrix):
     """
